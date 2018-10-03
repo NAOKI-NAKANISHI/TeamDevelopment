@@ -1,0 +1,34 @@
+任意のフォルダで以下コマンドを入力
+
+git clone https://github.com/アカウント名/test
+
+これで任意フォルダの配下にtestが作成される。
+
+testに移動後以下のコマンドを入力
+
+git config user.name “アカウント名”
+git config user.email “メールアドレス”
+
+これでgitの設定は完了
+
+
+以下のコマンドで文字制限を解除　スーパーユーザで押下
+
+git config --system core.longpaths true
+
+
+testに移動後以下のコマンドを入力することでリモートリポジトリをローカルに反映
+
+git pull
+
+testに移動後以下のコマンドを入力することでローカルリポジトリをリモートに反映
+
+git add --all
+
+git commit -m "コメント"
+
+git push
+
+エラーが出た場合は以下のコマンドを入力
+
+git remote set-url origin http://アカウント名:パスワード@github.com/アカウント名/test

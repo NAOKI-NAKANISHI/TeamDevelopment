@@ -1,0 +1,81 @@
+Eclipse
+
+Struts2
+�@処理の流れ
+
+Webプロジェクト実行時　web.xmlが実行される、処理に応じてacitonに記載のファイルに遷移　遷移先の場所はstruts.xmlに記載
+JSPとactionの遷移はstruts.xmlに則る
+JSPとactionの間にValueStackがありそこに値が渡されやり取りする。extends ActionSupportで使用可能になる
+jSPから値をvaluestackに保存し、それをactionクラスのゲッターとセッターでやり取りをする　一番最初に実行される
+二番目は取得した値を保存する。　三番目にexcuteが実行
+
+
+PCとサーバーのやりとり
+
+PCからwebサーバーにリクエスト
+↓
+WebサーバーではWeb.xml
+StrutsPrepareAndExcuteFilterが起動、これがstrutsの起動確認及び全てのプログラムをトレースする。実行準備をする
+→足りないものがあった場合は404エラー、web.xmlの綴りミスや, struts.xmlの綴りミスなどもある
+↓
+JSP	struts2ではsタグの使用が可能 e.g. <s:property> <s:submit>
+	sタグにはHTML＋CSS機能が内包
+	JSPは実行時にサーブレットに変換され、Javaプログラム(Classファイル)に変わる。そのあとにHTMLに変換され表示される。
+↓
+Action	値を使用して、処理、編集を行う。
+
+
+JSPとActionでの値のやりとりはValueStackを用いる。値を一時的に保存 
+JSPとActionで値によってstruts.xmlに分析された結果遷移先が決定。
+JSP側ではsubmitを押した瞬間に値がValueStackに送られ、記憶する。
+Action側では、セッターゲッターを用いてValueStackの値を取得。セッターゲッターがないとJSPから送られてきた値を取得できない。
+
+1. セッターゲッターが一番最初に実行。
+ValueStackから値を取得するにはセッターを使用。ValueStack側から見てActionに値を登録すると解釈する
+ValueStackに値を登録するにはゲッターを使用。ValueStack側から見てActionの情報を取得すると解釈する
+
+2. セッターゲッターで取得した値をフィールド変数に記憶させる
+
+3. execute()が実行
+
+4. ゲッターを使用してValueStackに値を保存
+
+5. JSPはValueStackに登録されている値を自動的に取得する。struts.xmlで遷移先の決定後に行われる
+→StrutsPrepareAndExcuteFilterが実行
+
+
+Session
+
+各PCからのリクエストに対しsession_idを発行	sessionハイジャックされる危険性を考え、sessionに保存させる内容はよく考える
+
+ValueStackとsessionの使い分け
+保持する時間の長さで決定する。一回きりなどの場合はValueStack
+
+ValueStackの中にsessionを内包させることは可能。実際はsturtsが通常のセッションに途中で変換(SessionAwareが実現)している。
+これはSessionAwareを実装、ActionSupportを継承することで実現
+
+
+session.put(“”, );
+第一引数はキーを指定。ユーザーが自由に定義可能。第二引数は値を記述。
+
+session.get(“”);
+引数はキーを指定
+
+session.remove(“”);
+引数はキーを指定
+
+session.clear();
+
+JSPでSession
+<s:property value = “session.xxx”>  ValueStack経由でsessionという箱から値を取得。
+				    こちらのsessionはValueStackに内包されているものなので、使い回しできなかったりする
+				　　　こちらは使わない
+<s:property value = “#session.xxx”> OGNL式　本来のセッションから値を持ってくる　こっちを使う
+
+
+
+
+
+
+
+

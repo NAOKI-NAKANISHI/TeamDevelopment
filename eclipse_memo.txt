@@ -1,0 +1,15 @@
+Eclipseが逝かれた時は
+
+/Applications/Eclipse.app/Contents/MacOS/eclipse  -clean を実行
+
+上記は一例、Eclipse.appの保存場所は端末により異なるので自身の環境に合わせて適宜変更する
+E.g. /somewhere/Eclipse.app/Contents/MacOS/eclipse -clean
+
+これでも治らない場合は、以下を試す
+
+・起動時に指定したをワークスペースに移動
+隠しファイルを表示した上で、.metadataフォルダを削除、念のためバックアップを取っておく
+
+・プロジェクト全体をビルドし直す。プロジェクトメニュー→クリーンを実行
+
+
