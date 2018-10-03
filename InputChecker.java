@@ -1,21 +1,51 @@
 package com.internousdev.sampleweb.util;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.regex.*;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils
 ;
+import org.omg.CORBA.PRIVATE_MEMBER;
+
+import com.ibm.icu.util.BytesTrie.Entry;
+import com.sun.javafx.collections.MappingChange.Map;
 public class InputChecker {
-
-
-
 	/**
 	 * このプログラムは渡された値を正規表現か検証するものです。
 	 * 使い方はdoCheckに9つの引数を渡します。後半部分には当てはまる形式にtrueを入れます。
 	 * emailを判別したいのであれば英字、数字、記号を含むため下記のようになります。
 	 * 例(質問の内容,値,最小文字数,最大文字数,true,false,false,true,true)となります。
 	 * 結果はList形式で渡されることに気を付けてください。
-	 *
-	 */
+	 ***/
+	public List<String> checkPattern(String type, String target, String triger, int min, int max) {
+		List<String> messageList = new ArrayList<String>();					//エラーメッセージを格納するためのリスト
+		HashMap<String, String> map = new HashMap<>();
+		
+		if(StringUtils.isEmpty(target)){
+			messageList.add(type + "を入力してください。");
+		}
+		map.put("半角英字、漢字、ひらがな", "\\b([一-龠a-zA-Zぁ-ゞ])+\\b");
+		map.put("ひらがな", "\\b([ぁ-ゞ])+\\b");
+		map.put("半角英数字、半角記号", "\\b([0-9a-zA-Z-/:-@\\[-\\`\\{-\\~])+\\b");
+		map.put("半角英数字", "\\b([0-9a-zA-Z])+\\b");
+		map.put("半角英数字、漢字、ひらがな、カタカナ、半角記号", "\\b([0-9a-zA-Z一-龠ぁ-ゞァ-ヶ-/:-@\\[-\\`\\{-\\~])+\\b");
+		map.put("半角数字", "\\b([0-9])+\\b");
+		
+        Pattern patternCheck = Pattern.compile(map.get(triger));//正規表現を用いてチェックを行う
+        Matcher matcher = patternCheck.matcher(target);
+        
+        if(!(matcher.find()) && messageList.isEmpty()) {
+        	messageList.add(type + "は" + triger + "で入力してください。");
+	    }
+        if (target.length() < min || target.length() > max) {
+        	messageList.add(type + "は" + min + "文字以上" + max + "文字以下で入力してください。");
+		}    
+		return messageList;
+	}
+
+		
+	
 	public List<String> doCheck(String propertyName,String value,int minLength,int maxLength,boolean availableAlphabeticCharacters,boolean availableKanji,boolean availableHiragana,boolean availableHalfWidthDigit,boolean availableHalfWidthSymbols,boolean availableKatakana,boolean availableFullWidthSymbols){
 
 		//検証した結果を入れるList
