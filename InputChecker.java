@@ -100,17 +100,17 @@ public class InputChecker {
 		map.put("半角数字", "\\b([0-9])+\\b");
 		map.put("半角英数字、漢字、ひらがな、カタカナ", "\\b([0-9a-zA-Z一-龠ぁ-ゞァ-ヶ])+\\b");
 		
-/*	三項演算子を用いて強引に１行で書いた場合はこうなる。
+		/*	三項演算子を用いて強引に１行で書いた場合はこうなる。
 		 
-String pattern = "半角英字、漢字、ひらがな".equals(triger) ? "\\b([一-龠a-zA-Zぁ-ゞ])+\\b" : 
-				 "ひらがな".equals(triger) ? "\\b([ぁ-ゞ])+\\b" : 
-				 "半角英数字、半角記号".equals(triger) ? "\\b([0-9a-zA-Z-/:-@\\[-\\`\\{-\\~])+\\b" : 
-				 "半角英数字".equals(triger) ? "\\b([0-9a-zA-Z])+\\b" :
-				 "半角英数字、漢字、ひらがな、カタカナ、半角記号".equals(triger) ? "\\b([0-9a-zA-Z一-龠ぁ-ゞァ-ヶ-/:-@\\[-\\`\\{-\\~])+\\b" : 
-				 "半角数字".equals(triger) ? "\\b([0-9])+\\b" : "\\b([0-9a-zA-Z一-龠ぁ-ゞァ-ヶ])+\\b";
+		String pattern = "半角英字、漢字、ひらがな".equals(triger) ? "\\b([一-龠a-zA-Zぁ-ゞ])+\\b" : 
+				 		 "ひらがな".equals(triger) ? "\\b([ぁ-ゞ])+\\b" : 
+				 		 "半角英数字、半角記号".equals(triger) ? "\\b([0-9a-zA-Z-/:-@\\[-\\`\\{-\\~])+\\b" : 
+				 		 "半角英数字".equals(triger) ? "\\b([0-9a-zA-Z])+\\b" :
+				 		 "半角英数字、漢字、ひらがな、カタカナ、半角記号".equals(triger) ? "\\b([0-9a-zA-Z一-龠ぁ-ゞァ-ヶ-/:-@\\[-\\`\\{-\\~])+\\b" : 
+				 		 "半角数字".equals(triger) ? "\\b([0-9])+\\b" : "\\b([0-9a-zA-Z一-龠ぁ-ゞァ-ヶ])+\\b";
 			
-Pattern patternCheck = Pattern.compile(pattern));
-*/
+		Pattern patternCheck = Pattern.compile(pattern));
+ 		*/
 		
         Pattern patternCheck = Pattern.compile(map.get(triger));//正規表現を用いてチェックを行う
         Matcher matcher = patternCheck.matcher(target);
