@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 開発者モード(デバッグしたい時にはコメント外してください。ユーザーのエラーページが無効にできます) -->
+	<!-- <constant name="struts.devMode" value="true" /> -->
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="com.internousdev.i1810a.action" extends="struts-default">
+			<interceptors>
+				<interceptor name="session" class="com.internousdev.i1810a.util.SessionInterceptor" />
+				<interceptor-stack name="sessionExpirayStack">
+			    <interceptor-ref name="defaultStack"/>
+			    <interceptor-ref name="session"/>
+			   </interceptor-stack>
+		   </interceptors>
+		<action name="AddCartAction" class="com.internousdev.i1810a.action.AddCartAction" method="execute">
+		    <interceptor-ref name="defaultStack"/>
+		    <interceptor-ref name="token"/>
+		    <result name="invalid.token">cart.jsp</result>
+			<result name="success">cart.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+
+		<action name="CartAction" class="com.internousdev.i1810a.action.CartAction" method="execute">
+			<result name="success">cart.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+
+		<action name="CreateDestinationAction" class="com.internousdev.i1810a.action.CreateDestinationAction" method="execute">
+			<result name="success">createDestination.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+
+		<action name="CreateDestinationCompleteAction" class="com.internousdev.i1810a.action.CreateDestinationCompleteAction" method="execute">
+			<result name="success">createDestinationComplete.jsp</result>
+			<result name="error">createDestination.jsp</result>
+		</action>
+
+		<action name="CreateDestinationConfirmAction" class="com.internousdev.i1810a.action.CreateDestinationConfirmAction" method="execute">
+			<result name="success">createDestinationConfirm.jsp</result>
+			<result name="error">createDestination.jsp</result>
+		</action>
+
+		<action name="CreateUserAction" class="com.internousdev.i1810a.action.CreateUserAction" method="execute">
+			<result name="success">createUser.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+
+		<action name="CreateUserCompleteAction"
+			class="com.internousdev.i1810a.action.CreateUserCompleteAction"
+			method="execute">
+			<result name="success">createUserComplete.jsp</result>
+			<result name="error">createUser.jsp</result>
+		</action>
+
+		<action name="CreateUserConfirmAction"
+			class="com.internousdev.i1810a.action.CreateUserConfirmAction"
+			method="execute">
+			<result name="success">createUserConfirm.jsp</result>
+			<result name="error">createUser.jsp</result>
+		</action>
+
+		<action name="DeleteCartAction" class="com.internousdev.i1810a.action.DeleteCartAction"
+			method="execute">
+			<result name="success">cart.jsp</result>
+			<result name="error">cart.jsp</result>
+		</action>
+
+		<action name="DeletePurchaseHistoryAction"
+			class="com.internousdev.i1810a.action.DeletePurchaseHistoryAction"
+			method="execute">
+			<result name="success">purchaseHistory.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+
+		<action name="GoLoginAction" class="com.internousdev.i1810a.action.GoLoginAction"
+			method="execute">
+			<result name="success">login.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+
+		<action name="HomeAction" class="com.internousdev.i1810a.action.HomeAction"
+			method="execute">
+			
+			<result name="success">home.jsp</result>
+		</action>
+
+		<action name="LoginAction" class="com.internousdev.i1810a.action.LoginAction"
+			method="execute">
+			<result name="success">home.jsp</result>
+			<result name="settlement">settlementConfirm.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+
+		<action name="LogoutAction" class="com.internousdev.i1810a.action.LogoutAction"
+			method="execute">
+			<result name="success">index.jsp</result>
+		</action>
+
+		<action name="MyPageAction" class="com.internousdev.i1810a.action.MyPageAction"
+			method="execute">
+			<interceptor-ref name="sessionExpirayStack" />
+   			 <result name="session">login.jsp</result>
+			<result name="success">mypage.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+
+		<action name="ProductDetailsAction"
+			class="com.internousdev.i1810a.action.ProductDetailsAction" method="execute">
+			<result name="success">productDetails.jsp</result>
+			<result name="error">productList.jsp</result>
+		</action>
+
+		<action name="ProductListAction" class="com.internousdev.i1810a.action.ProductListAction"
+			method="execute">
+			<result name="success">productList.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+
+		<action name="PurchaseHistoryAction"
+			class="com.internousdev.i1810a.action.PurchaseHistoryAction" method="execute">
+			<result name="success">purchaseHistory.jsp</result>
+		</action>
+
+		<action name="ResetPasswordAction"
+			class="com.internousdev.i1810a.action.ResetPasswordAction" method="execute">
+			<result name="success">resetPassword.jsp</result>
+
+		</action>
+
+		<action name="ResetPasswordCompleteAction"
+			class="com.internousdev.i1810a.action.ResetPasswordCompleteAction"
+			method="execute">
+			<result name="success">resetPasswordComplete.jsp</result>
+			<result name="error">resetPassword.jsp</result>
+		</action>
+
+		<action name="ResetPasswordConfirmAction"
+			class="com.internousdev.i1810a.action.ResetPasswordConfirmAction"
+			method="execute">
+			<result name="success">resetPasswordConfirm.jsp</result>
+			<result name="error">resetPassword.jsp</result>
+		</action>
+
+		<action name="SearchItemAction" class="com.internousdev.i1810a.action.SearchItemAction"
+			method="execute">
+			
+			<result name="success">productList.jsp</result>
+			<result name="error">productList.jsp</result>
+		</action>
+
+		<action name="SettlementCompleteAction"
+			class="com.internousdev.i1810a.action.SettlementCompleteAction"
+			method="execute">
+			<result name="success">settlementComplete.jsp</result>
+			<result name="error">settlementConfirm.jsp</result>
+		</action>
+
+ 		<action name="SettlementConfirmAction"
+			class="com.internousdev.i1810a.action.SettlementConfirmAction"
+			method="execute">
+			<interceptor-ref name="sessionExpirayStack" />
+   			 <result name="session">login.jsp</result>
+			<result name="success">settlementConfirm.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+
+		 <action name="LoginHomeAction"
+			class="com.internousdev.i1810a.action.LoginHomeAction"
+			method="execute">
+			<result name="success">home.jsp</result>
+		</action>
+		
+	</package>
+</struts>
