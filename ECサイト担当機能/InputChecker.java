@@ -74,17 +74,4 @@ public class InputChecker {
 		}
 		return stringList;
 	}
-	/**
-	 * 　メールアドレスに@が含まれているか判定しています
-	 */
-	public List<String> emailCheck(String email){
-		List<String> stringList = new ArrayList<String>();
-		 Pattern p = Pattern.compile("(?=.@).*$");	//正規表現を用いてチェックを行う
-	      Matcher m = p.matcher(email);
-
-	      if(m.find()){
-	    	  stringList.add("正しいメールアドレスを入力してください");
-	      }
-    	  return stringList;
-	}
 }
