@@ -44,7 +44,7 @@ public class CartAction extends ActionSupport implements SessionAware{
 		}
 		session.put("cartInfoDtoList", cartInfoDtoList);//SQLでカートの中身を取得し、セッションに格納
 
-		int totalPrice = Integer.parseInt(String.valueOf(cartInfoDao.getTotalPrice(userId)));
+		int totalPrice = cartInfoDao.getTotalPrice(userId);
 		session.put("totalPrice", totalPrice);
 		result = SUCCESS;
 		if(!session.containsKey("mCategoryList")) {
