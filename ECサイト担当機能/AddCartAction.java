@@ -58,9 +58,6 @@ public class AddCartAction extends ActionSupport implements SessionAware{
 		if(!(iterator.hasNext())) {
 			cartInfoDtoList = null;
 		}
-		for(CartInfoDTO dto:cartInfoDtoList) {
-			System.out.println("CartInfoList: : "+dto.getProductName());
-		}
 		session.put("cartInfoDtoList", cartInfoDtoList);
 		int totalPrice = cartInfoDao.getTotalPrice(userId);
 		session.put("totalPrice", totalPrice);
