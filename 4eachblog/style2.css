@@ -1,0 +1,29 @@
+﻿.box{
+    width:800px;
+    background-color:lightgray;
+    text-align: center;
+}
+.box2{
+    width:800px;
+    background-color:lightgray;
+    text-align: center;
+}
+.box .img{
+    width: 20px;
+    margin: 20px 10px -10px 10px;
+}
+.box .pic{
+    display: inline-block;
+}
+.box2 .img{
+    width: 20px;
+    margin: 20px 10px -10px 10px;
+}
+.box2 .pic{
+    display: inline-block;
+}
+
+
+
+
+
